@@ -1,47 +1,48 @@
-🗄️ Locker Management System
+# 🗄️ **Locker Management System**
 
-A simple Java + MySQL based locker management system designed for Class 12 Computer Science Project / IA.
+A simple **Java + MySQL** based locker management system designed for **Class 12 Computer Science Project / IA**.
 Students can register, assign lockers, and manage passwords, while admins manage all lockers through a clean Java Swing interface.
 
-✨ Features
-👨‍🎓 Student Features
+---
 
-Student registration
+## ✨ **Features**
 
-Student login
+### 👨‍🎓 **Student Features**
 
-View available lockers
+* Student registration
+* Student login
+* View available lockers
+* Assign **only one** locker
+* View assigned locker details
+* Change locker password
+* Logout
 
-Assign only one locker
+### 👨‍💼 **Admin Features**
 
-View assigned locker details
+* Admin login
+* View all lockers
+* Reset locker passwords
+* Unassign lockers
+* **Add new lockers**
+* Logout
 
-Change locker password
+---
 
-Logout
+## 🛠️ **Tech Stack**
 
-👨‍💼 Admin Features
+| Component    | Technology              |
+| ------------ | ----------------------- |
+| Frontend     | Java Swing              |
+| Backend      | Java                    |
+| Database     | MySQL                   |
+| JDBC Driver  | mysql-connector-j 9.5.0 |
+| Build System | Manual compile & run    |
 
-Admin login
+---
 
-View all lockers
+## 📂 **Project Folder Structure**
 
-Reset locker passwords
-
-Unassign lockers
-
-Add new lockers
-
-Logout
-
-🛠️ Tech Stack
-Component	Technology
-Frontend	Java Swing
-Backend	Java
-Database	MySQL
-JDBC Driver	mysql-connector-j 9.5.0
-Build System	Manual compile & run
-📂 Project Folder Structure
+```
 shiven_project/
 │
 ├── src/
@@ -68,11 +69,15 @@ shiven_project/
 ├── out/
 │
 └── README.md
+```
 
-⚙️ SQL Setup
+---
+
+## ⚙️ **SQL Setup**
 
 Run these commands in MySQL:
 
+```sql
 CREATE DATABASE locker_system;
 USE locker_system;
 
@@ -119,52 +124,64 @@ INSERT INTO lockers (locker_id, status) VALUES
 UPDATE lockers 
 SET status = 'assigned', assigned_to = 1, locker_password = '1111'
 WHERE locker_id = 1;
+```
 
-💻 How to Run the Project
-1️⃣ Navigate to project folder
+---
+
+## 💻 **How to Run the Project**
+
+### 1️⃣ **Navigate to project folder**
+
+```cmd
 cd "D:\Data\Projects\shiven_project"
+```
 
-2️⃣ Delete old compiled files
+### 2️⃣ **Delete old compiled files**
+
+```cmd
 rmdir /s /q out
+```
 
-3️⃣ Compile all Java files
+### 3️⃣ **Compile all Java files**
+
+```cmd
 javac -cp ".;lib\mysql-connector-j-9.5.0.jar" -d out src\db\DBConnection.java src\models\*.java src\services\*.java src\ui\*.java src\Main.java
+```
 
-4️⃣ Run the project
+### 4️⃣ **Run the project**
+
+```cmd
 java -cp ".;out;lib\mysql-connector-j-9.5.0.jar" Main
+```
 
-🖼️ Screenshots (Add Later)
+---
+
+## 🖼️ **Screenshots (Add Later)**
+
+```
 ![Login Screen](screenshots/login.png)
 ![Student Dashboard](screenshots/student_dashboard.png)
 ![Admin Dashboard](screenshots/admin_dashboard.png)
 ![Assign Locker](screenshots/assign_locker.png)
-
+```
 
 Create a folder:
 
+```
 screenshots/
-
+```
 
 and place PNG/JPG files inside.
 
-🚀 Future Enhancements
+---
 
-Search and filter in Admin Dashboard
+## 🚀 **Future Enhancements**
 
-Dark mode UI
+* Search and filter in Admin Dashboard
+* Dark mode UI
+* Export lockers to CSV
+* OTP-based locker reset
+* Web-based version (HTML/JS)
 
-Export lockers to CSV
+---
 
-OTP-based locker reset
-
-Web-based version (HTML/JS)
-
-📜 License
-
-This project is for educational use (Class 12 CBSE/ISC/IB Computer Science).
-
-👤 Developed By
-
-Lakshya
-Locker Management System — Java + MySQL
-Class 12 Computer Science Project
