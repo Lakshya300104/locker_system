@@ -156,17 +156,14 @@ java -cp ".;out;lib\mysql-connector-j-9.5.0.jar" Main
 
 ---
 
-## 🖼️ **Screenshots (Add Later)**
+## 🖼️ **Screenshots**
 
 ```
-<img width="493" height="559" alt="image" src="https://github.com/user-attachments/assets/dac2c764-0b9c-4b37-aea1-6aa0cd5e78e7" />
+![Login Screen](screenshots/login.png)
+![Student Dashboard](screenshots/student_dashboard.png)
+![Admin Dashboard](screenshots/admin_dashboard.png)
+![Assign Locker](screenshots/assign_locker.png)
 
-<img width="554" height="412" alt="image" src="https://github.com/user-attachments/assets/9492013e-3e03-45a0-a305-161fcb7ec53f" />
-
-<img width="910" height="667" alt="image" src="https://github.com/user-attachments/assets/4e6603a6-1156-4ef6-9daa-715e024df8d0" />
-
-
-<img width="604" height="480" alt="image" src="https://github.com/user-attachments/assets/dc2ce4e2-a807-44aa-85d7-135719f0f7bf" />
 
 ```
 
