@@ -2,7 +2,6 @@ package services;
 
 import db.DBConnection;
 import models.Locker;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,7 @@ public class LockerService {
         try {
             Connection con = DBConnection.getConnection();
             PreparedStatement stmt =
-                    con.prepareStatement("SELECT * FROM lockers WHERE status='available'");
+                con.prepareStatement("SELECT lockers.*, users.full_name FROM lockers LEFT JOIN users ON lockers.assigned_to=users.user_id WHERE status='available'");
 
             ResultSet rs = stmt.executeQuery();
 
@@ -23,7 +22,8 @@ public class LockerService {
                         rs.getInt("locker_id"),
                         rs.getString("status"),
                         rs.getInt("assigned_to"),
-                        rs.getString("locker_password")
+                        rs.getString("locker_password"),
+                        rs.getString("full_name")
                 ));
             }
 
@@ -31,14 +31,16 @@ public class LockerService {
 
         return list;
     }
-
 
     public List<Locker> getAllLockers() {
         List<Locker> list = new ArrayList<>();
         try {
             Connection con = DBConnection.getConnection();
-            PreparedStatement stmt =
-                    con.prepareStatement("SELECT * FROM lockers");
+
+            PreparedStatement stmt = con.prepareStatement(
+                "SELECT lockers.*, users.full_name " +
+                "FROM lockers LEFT JOIN users ON lockers.assigned_to = users.user_id"
+            );
 
             ResultSet rs = stmt.executeQuery();
 
@@ -47,7 +49,8 @@ public class LockerService {
                         rs.getInt("locker_id"),
                         rs.getString("status"),
                         rs.getInt("assigned_to"),
-                        rs.getString("locker_password")
+                        rs.getString("locker_password"),
+                        rs.getString("full_name")
                 ));
             }
 
@@ -56,17 +59,16 @@ public class LockerService {
         return list;
     }
 
-
     public Locker getLockerByStudent(int studentId) {
         Locker locker = null;
-
         try {
             Connection con = DBConnection.getConnection();
-            PreparedStatement stmt =
-                    con.prepareStatement("SELECT * FROM lockers WHERE assigned_to=?");
+            PreparedStatement stmt = con.prepareStatement(
+                "SELECT lockers.*, users.full_name " +
+                "FROM lockers LEFT JOIN users ON lockers.assigned_to=users.user_id WHERE assigned_to=?"
+            );
 
             stmt.setInt(1, studentId);
-
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -74,7 +76,8 @@ public class LockerService {
                         rs.getInt("locker_id"),
                         rs.getString("status"),
                         rs.getInt("assigned_to"),
-                        rs.getString("locker_password")
+                        rs.getString("locker_password"),
+                        rs.getString("full_name")
                 );
             }
 
@@ -83,19 +86,9 @@ public class LockerService {
         return locker;
     }
 
-
     public boolean assignLocker(int lockerId, int studentId, String password) {
-        
-        try {
-            Locker existing = getLockerByStudent(studentId);
-            if (existing != null) {
-                return false;  // Already has locker
-        }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-
+        Locker existing = getLockerByStudent(studentId);
+        if (existing != null) return false;
 
         try {
             Connection con = DBConnection.getConnection();
@@ -112,7 +105,6 @@ public class LockerService {
         return false;
     }
 
-
     public boolean resetLockerPassword(int lockerId, String password) {
         try {
             Connection con = DBConnection.getConnection();
@@ -128,7 +120,6 @@ public class LockerService {
         return false;
     }
 
-
     public boolean unassignLocker(int lockerId) {
         try {
             Connection con = DBConnection.getConnection();
@@ -143,13 +134,11 @@ public class LockerService {
         return false;
     }
 
-
-    // ⭐ Admin adding new lockers ⭐
     public boolean addLocker(int lockerId) {
         try {
             Connection con = DBConnection.getConnection();
             PreparedStatement stmt =
-                    con.prepareStatement("INSERT INTO lockers(locker_id, status) VALUES (?, 'available')");
+                con.prepareStatement("INSERT INTO lockers(locker_id, status) VALUES (?, 'available')");
 
             stmt.setInt(1, lockerId);
 

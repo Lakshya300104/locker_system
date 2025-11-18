@@ -57,13 +57,16 @@ public class AdminDashboard extends JFrame {
         List<Locker> list = service.getAllLockers();
 
         DefaultTableModel model =
-                new DefaultTableModel(new String[]{"ID", "Status", "Assigned To", "Password"}, 0);
+                new DefaultTableModel(new String[]{"ID", "Status", "Assigned To (Name)", "Password"}, 0);
 
         for (Locker l : list) {
+            String name = l.getAssignedName();
+            if (name == null) name = "—";
+
             model.addRow(new Object[]{
                     l.getLockerId(),
                     l.getStatus(),
-                    l.getAssignedTo(),
+                    name,
                     l.getLockerPassword()
             });
         }
