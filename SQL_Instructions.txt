@@ -1,0 +1,60 @@
+To create the database:
+
+        CREATE DATABASE locker_system;
+        USE locker_system;
+
+(Make sure you use the same name for database, or change the database name in the DBConnection file)
+
+user TABLE:
+        CREATE TABLE users (
+            user_id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(50) NOT NULL UNIQUE,
+            password VARCHAR(100) NOT NULL,
+            role VARCHAR(10) NOT NULL,      -- 'student' or 'admin'
+            full_name VARCHAR(100)
+        );
+
+locker TABLE:
+
+        CREATE TABLE lockers (
+            locker_id INT PRIMARY KEY,
+            status VARCHAR(20) DEFAULT 'available',
+            assigned_to INT NULL,
+            locker_password VARCHAR(20),
+            FOREIGN KEY (assigned_to) REFERENCES users(user_id)
+        );
+
+
+
+Sample Data to be inserted:
+
+        INSERT INTO users (username, password, role, full_name)
+        VALUES ('admin01', 'admin123', 'admin', 'Administrator 01');
+
+
+        INSERT INTO users (username, password, role, full_name)
+        VALUES 
+        ('stu101', 'pass101', 'student', 'Student One'),
+        ('stu102', 'pass102', 'student', 'Student Two'),
+        ('stu103', 'pass103', 'student', 'Student Three');
+
+
+        INSERT INTO lockers (locker_id, status) VALUES
+        (1, 'available'),
+        (2, 'available'),
+        (3, 'available'),
+        (4, 'available'),
+        (5, 'available'),
+        (6, 'available'),
+        (7, 'available'),
+        (8, 'available'),
+        (9, 'available'),
+        (10, 'available');
+
+
+Assign 1 locker manually (OPTIONAL):
+
+        UPDATE lockers 
+        SET status = 'assigned', assigned_to = 1, locker_password = '1111'
+        WHERE locker_id = 1;
+
