@@ -7,7 +7,7 @@ public class DBConnection {
 
     private static final String url = "jdbc:mysql://localhost:3306/locker_system";
     private static final String username = "root";
-    private static final String password = "261997";
+    private static final String password = "your_password";
 
     public static Connection getConnection() {
         try {
